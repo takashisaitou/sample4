@@ -1,0 +1,17 @@
+<%= form_for(@note) do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= @note.errors.count %>件のエラーがあります。</h2>
+      <ul>
+      <% @note.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  タイトル
+  <%= f.text_field :title, class: "form-control title-field" %><br>
+  内容
+  <%= f.text_area :content, class: "form-control content-field" %><br>
+  <li><%= f.submit "投稿する", class: "btn primary-btn" %></li>
+<% end %>
