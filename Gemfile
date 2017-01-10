@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'devise'
+
 gem 'bootstrap-sass', '3.2.0.0'
 
 gem 'hirb', '0.7.3'

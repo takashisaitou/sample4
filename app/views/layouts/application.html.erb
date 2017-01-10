@@ -12,17 +12,37 @@
 
 <header class="navbar">
   <div class="container">
-    <div id="logo">Gatebook</div>
-    <ul class="header-right">
-      <li><%= link_to "Top", root_path %></li>
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "New", new_note_path %></li>
-      <li><%= link_to "Index", notes_path %></li>
-    </ul>
+    <div id="logo"><%= link_to "Gatebook",root_path %></div>
+    <% if user_signed_in? %>
+      <ul class="header-right">
+        <li><%= link_to "ユーザー一覧", users_path %></li>
+
+        <li><%= link_to current_user.email, current_user %></li>
+
+        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+
+      </ul>
+    <% else %>
+      <ul class="header-right">
+        <li><%= link_to "概要", about_path %></li>
+
+        <li><%= link_to "新規登録", new_user_registration_path %></li>
+
+        <li><%= link_to "ログイン", new_user_session_path %></li>
+
+      </ul>
+    <% end %>
   </div>
 </header>
 
 <div class="container">
+
+    <p class="alert alert-success">
+      <%= notice %>
+    </p>
+    <p class="alert alert-danger">
+      <%= alert %>
+    </p>
   <%= yield %>
 </div>
 

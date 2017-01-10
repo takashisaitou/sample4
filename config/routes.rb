@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
-  # get '/notes/new' => 'notes#new'
-  # post '/notes' => 'notes#create'
-  # get '/notes' => 'notes#index'
-  # get '/notes/:id' => 'notes#show', as: 'note'
-  # get '/notes/:id/edit' => 'notes#edit', as: 'edit_note'
-  # patch '/notes/:id' => 'notes#update', as: 'update_note'
-  # # destroyアクションへのルーティングを設定してください
-  # delete '/notes/:id' => 'notes#destroy', as: 'destroy_note'
-  resources :notes
+
+  devise_for :users
+  resources :users, only: [:index, :show, :edit, :update] do
+    member do
+      get :like_notes
+    end
+  end
+
+  resources :notes, only: [:show, :create, :edit, :update, :destroy] do
+    member do
+      get :liking_users
+    end
+  end
+
+  post '/like/:note_id' => 'likes#like', as: 'like'
+  delete '/unlike/:note_id' => 'likes#unlike', as: 'unlike'
   root 'home#top'
   get '/about' => 'home#about'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

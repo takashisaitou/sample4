@@ -1,0 +1,21 @@
+<li>
+  <%= image_for(note.user) %>
+  <span class="user-name">
+    <%= note.user.name %>
+  </span>
+  <p>タイトル</p>
+  <span class="content">
+    <%= link_to note.title, note_path(note.id) %>
+  </span>
+
+<div>
+  <small>
+    <!-- 投稿がいいね！されている数を表示してください -->
+    <%= note.likes.count %>人がいいね！といっています
+  </small>
+</div>
+
+  <span>
+    <%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+  </span>
+</li>
